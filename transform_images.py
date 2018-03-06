@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageEnhance
 
 
 def openImageFile(filename):
@@ -52,14 +52,31 @@ def rotate270(filename):
     output_image.save(output_filename, extension)
 
 
+def sharpen(filename):
+    input_image = openImageFile(filename)
+    enhancer = ImageEnhance.Sharpness(input_image)
+    output_image = enhancer.enhance(2.0)
+    output_filename, extension = modifyFileName(input_image, "_S2")
+    output_image.save(output_filename, extension)
+
+
+def blur(filename):
+    input_image = openImageFile(filename)
+    enhancer = ImageEnhance.Sharpness(input_image)
+    output_image = enhancer.enhance(0.0)
+    output_filename, extension = modifyFileName(input_image, "_B0")
+    output_image.save(output_filename, extension)
+
+
 def performTransformationSet(filename):
     flipLeftToRight(filename)
     flipTopToBottom(filename)
     rotate90(filename)
     rotate180(filename)
     rotate270(filename)
+    sharpen(filename)
+    blur(filename)
 
-performTransformationSet("coins.jpeg")
 """
 
 
