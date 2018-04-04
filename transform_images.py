@@ -68,7 +68,22 @@ def blur(filename):
     output_image.save(output_filename, extension)
 
 
+def resize(filename):
+    input_image = openImageFile(filename)
+    output_image = input_image.resize((528, 360))
+    output_filename, extension = modifyFileName(input_image, "")
+    output_image.save(filename, extension)
+
+
 def performTransformationSet(filename):
+    flipLeftToRight(filename)
+    flipTopToBottom(filename)
+    rotate90(filename)
+    rotate180(filename)
+    rotate270(filename)
+
+
+def performTransformationSetWithBlurAndSharpen(filename):
     flipLeftToRight(filename)
     flipTopToBottom(filename)
     rotate90(filename)
